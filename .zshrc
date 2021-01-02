@@ -21,3 +21,4 @@ alias gstp='git stash pop'
 export RUBY_CONFIGURE_OPTS=--with-openssl-dir=/usr/local/opt/openssl@1.1
 
 eval "$(rbenv init -)"
+alias config='/usr/bin/git --git-dir=/Users/me/.cfg/ --work-tree=/Users/me'

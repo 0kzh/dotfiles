@@ -51,13 +51,6 @@ set incsearch
 set showmatch
 
 """"""""""""""""""""""""""
-" Prettier
-""""""""""""""""""""""""""
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-let g:prettier#autoformat = 1
-autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.html,*.py PrettierAsync
-
-""""""""""""""""""""""""""
 " NerdTree
 """"""""""""""""""""""""""
 " auto-open on open of directlry
@@ -68,8 +61,24 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " open automatically if no file / dir specified
 autocmd StdinReadPre * let s:std_in=1
 autocmd BufWinEnter * NERDTreeMirror
+" make clickable!
+set mouse=a
+let g:NERDTreeMouseMode=3
+" double click to open in new tab
+autocmd VimEnter * call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>', 'scope': "FileNode", 'callback': "OpenInTab", 'override':1 })
+function! OpenInTab(node)
+  call a:node.activate({'reuse': 'all', 'where': 't'})
+endfunction
 
-" Navigation
+" Easily move lines up/down (Opt + dir)
+nnoremap ∆ :m .+1<CR>==
+nnoremap ˚ :m .-2<CR>==
+inoremap ∆ <Esc>:m .+1<CR>==gi
+inoremap ˚ <Esc>:m .-2<CR>==gi
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
+
+" Navigation (Control + dir)
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
@@ -81,3 +90,4 @@ map <leader>nf :NERDTreeFind<cr>
 
 " Tab for COC autocomplete
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
+inoremap <expr> <CR> pumvisible() ? coc#_select_confirm() : "<CR>"
