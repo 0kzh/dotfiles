@@ -2,7 +2,7 @@ bindkey -v
 alias python=/usr/local/bin/python3.7
 alias pip=/usr/local/bin/pip3.7
 export MONGO_PATH=/usr/local/mongodb export
-PATH=$PATH:$MONGO_PATH/bin:/Users/me/Library/Python/3.7/bin
+PATH=$PATH:$MONGO_PATH/bin:/usr/local/bin:/usr/bin:/Users/me/Library/Python/3.7/bin
 
 alias vim='nvim'
 alias gpl='git pull'
